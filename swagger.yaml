@@ -5,9 +5,9 @@ info:
   version: 1.0.0
 
 servers:
-  - url: https://api.example.com/v1
-    description: Production server
-
+  - url:
+    description: 
+    
 tags:
   - name: Auth
     description: Registration and authentication
