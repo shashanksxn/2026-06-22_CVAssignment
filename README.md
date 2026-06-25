@@ -7,12 +7,13 @@
 
 **swagger.yaml:** the swagger file for APIs
 
+The code is organized in two folders:
+- **therapy-app:** it contains the code for building aws infrastructure
+- **therapy-lambda:** this contains the implementation of the API
+
 **postman_collection.json:** the Postman collection, can be imported in Postman and tested
 
 ###### To Run
-The code is organized in two folders:
-- therapy-app: it contains the code for building aws infrastructure
-- therapy-lambda: this contains the implementation of the API
 
 First compile the therapy-lambda using
 ```
