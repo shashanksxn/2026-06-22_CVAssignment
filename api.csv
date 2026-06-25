@@ -1,0 +1,11 @@
+API,POST,GET,DELETE,PATCH
+/users,"create a new user {type, name, email, password}",get a list of users,–,–
+/users/{userId},–,get user data,delete a user,"edit user {name, email, password}"
+/users/{userId}/requests,send a mapping request {userId},view mapping requests,–,–
+/users/{userId}/requests/{requestId},–,–,reject or delete a request,approve a request
+/users/{userId}/mappings,NOT ALLOWED,view mappings,–,–
+/users/{userId}/mappings/{mappingId},–,get mapping data,delete a mapping,NOT ALLOWED
+/users/{userId}/mappings/{mappingId}/messages,send a message,get all messages,NOT ALLOWED,NOT ALLOWED
+/users/{userId}/mappings/{mappingId}/journal-access,–,get mapping journal access,NOT ALLOWED,toggle journal access
+/users/{userId}/journal,"add a entry {time, emotion, intensity}",get list of all emotions,–,–
+/users/{userId}/journal/{journal id},–,–,delete a journal,NOT ALLOWED
