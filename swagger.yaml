@@ -1,0 +1,1201 @@
+openapi: "3.0.1"
+info:
+  title: "Therapy Platform API"
+  description: "REST API for managing clients, therapists, mappings, sessions, messages, and slots."
+  version: "1.0.0"
+
+paths:
+
+  # ──────────────────────────────────────────────
+  # CLIENTS
+  # ──────────────────────────────────────────────
+
+  /clients:
+    post:
+      summary: Register a new client
+      operationId: createClient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientRegistration'
+      responses:
+        "201":
+          description: Client created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedResponse'
+        "400":
+          description: Fields missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "409":
+          description: Email already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    get:
+      summary: List all clients
+      operationId: listClients
+      responses:
+        "200":
+          description: List of clients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+
+  /clients/{clientId}:
+    parameters:
+      - $ref: '#/components/parameters/clientId'
+
+    get:
+      summary: Get a client by ID
+      operationId: getClient
+      responses:
+        "200":
+          description: Client found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    delete:
+      summary: Delete a client
+      operationId: deleteClient
+      responses:
+        "200":
+          description: Deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    patch:
+      summary: Update a client
+      operationId: updateClient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientUpdate'
+      responses:
+        "200":
+          description: Changed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        "400":
+          description: Invalid fields
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # ──────────────────────────────────────────────
+  # CLIENT REQUESTS
+  # ──────────────────────────────────────────────
+
+  /clients/{clientId}/requests:
+    parameters:
+      - $ref: '#/components/parameters/clientId'
+
+    post:
+      summary: Client sends a mapping request to a therapist
+      operationId: createClientRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - therapistId
+              properties:
+                therapistId:
+                  type: string
+      responses:
+        "201":
+          description: Request created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        "404":
+          description: Client or Therapist not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "409":
+          description: Mapping already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    get:
+      summary: List pending requests for a client
+      operationId: listClientRequests
+      responses:
+        "200":
+          description: List of mapping requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Mapping'
+        "404":
+          description: Client not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /clients/{clientId}/requests/{requestId}:
+    parameters:
+      - $ref: '#/components/parameters/clientId'
+      - $ref: '#/components/parameters/requestId'
+
+    delete:
+      summary: Delete a client's mapping request
+      operationId: deleteClientRequest
+      responses:
+        "200":
+          description: Deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        "400":
+          description: Invalid request (already a mapping)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "401":
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Client or request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # ──────────────────────────────────────────────
+  # CLIENT MAPPINGS
+  # ──────────────────────────────────────────────
+
+  /clients/{clientId}/mappings:
+    parameters:
+      - $ref: '#/components/parameters/clientId'
+
+    get:
+      summary: List active mappings for a client
+      operationId: listClientMappings
+      responses:
+        "200":
+          description: List of mappings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Mapping'
+        "404":
+          description: Client not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /clients/{clientId}/mappings/{mappingId}:
+    parameters:
+      - $ref: '#/components/parameters/clientId'
+      - $ref: '#/components/parameters/mappingId'
+
+    delete:
+      summary: Delete a client mapping
+      operationId: deleteClientMapping
+      responses:
+        "200":
+          description: Deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        "401":
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Client or mapping not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # ──────────────────────────────────────────────
+  # CLIENT MAPPING — MESSAGES
+  # ──────────────────────────────────────────────
+
+  /clients/{clientId}/mappings/{mappingId}/messages:
+    parameters:
+      - $ref: '#/components/parameters/clientId'
+      - $ref: '#/components/parameters/mappingId'
+
+    post:
+      summary: Client sends a message
+      operationId: createClientMessage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageBody'
+      responses:
+        "201":
+          description: Message sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        "401":
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Client or mapping not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    get:
+      summary: Client retrieves messages for a mapping
+      operationId: listClientMessages
+      responses:
+        "200":
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+        "401":
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Client or mapping not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # ──────────────────────────────────────────────
+  # CLIENT MAPPING — SLOTS (view & book)
+  # ──────────────────────────────────────────────
+
+  /clients/{clientId}/mappings/{mappingId}/slots:
+    parameters:
+      - $ref: '#/components/parameters/clientId'
+      - $ref: '#/components/parameters/mappingId'
+
+    get:
+      summary: Client views available slots for their mapped therapist
+      operationId: listClientMappingSlots
+      responses:
+        "200":
+          description: Available slots
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Slot'
+        "401":
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Client or mapping not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /clients/{clientId}/mappings/{mappingId}/slots/{slotId}:
+    parameters:
+      - $ref: '#/components/parameters/clientId'
+      - $ref: '#/components/parameters/mappingId'
+      - $ref: '#/components/parameters/slotId'
+
+    post:
+      summary: Client books a slot (creates a session request)
+      operationId: bookSlot
+      responses:
+        "201":
+          description: Session request created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        "401":
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Client, mapping, or slot not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # ──────────────────────────────────────────────
+  # CLIENT MAPPING — JOURNAL ACCESS
+  # ──────────────────────────────────────────────
+
+  /clients/{clientId}/mappings/{mappingId}/journal-access:
+    parameters:
+      - $ref: '#/components/parameters/clientId'
+      - $ref: '#/components/parameters/mappingId'
+
+    patch:
+      summary: Client updates journal access for a mapping
+      operationId: updateJournalAccess
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - journalAccess
+              properties:
+                journalAccess:
+                  type: string
+                  enum: [yes, no]
+      responses:
+        "200":
+          description: Journal access updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        "401":
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Client or mapping not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # ──────────────────────────────────────────────
+  # CLIENT SESSIONS
+  # ──────────────────────────────────────────────
+
+  /clients/{clientId}/sessions:
+    parameters:
+      - $ref: '#/components/parameters/clientId'
+
+    get:
+      summary: List sessions for a client
+      operationId: listClientSessions
+      responses:
+        "200":
+          description: List of sessions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session'
+        "404":
+          description: Client not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # ──────────────────────────────────────────────
+  # THERAPISTS
+  # ──────────────────────────────────────────────
+
+  /therapists:
+    post:
+      summary: Register a new therapist
+      operationId: createTherapist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TherapistRegistration'
+      responses:
+        "201":
+          description: Therapist created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedResponse'
+        "400":
+          description: Fields missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "409":
+          description: Email already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    get:
+      summary: List all therapists
+      operationId: listTherapists
+      responses:
+        "200":
+          description: List of therapists
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Therapist'
+
+  /therapists/{therapistId}:
+    parameters:
+      - $ref: '#/components/parameters/therapistId'
+
+    get:
+      summary: Get a therapist by ID
+      operationId: getTherapist
+      responses:
+        "200":
+          description: Therapist found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Therapist'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    delete:
+      summary: Delete a therapist
+      operationId: deleteTherapist
+      responses:
+        "200":
+          description: Deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    patch:
+      summary: Update a therapist
+      operationId: updateTherapist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TherapistUpdate'
+      responses:
+        "200":
+          description: Changed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        "400":
+          description: Invalid fields
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # ──────────────────────────────────────────────
+  # THERAPIST REQUESTS
+  # ──────────────────────────────────────────────
+
+  /therapists/{therapistId}/requests:
+    parameters:
+      - $ref: '#/components/parameters/therapistId'
+
+    post:
+      summary: Therapist sends a mapping request to a client
+      operationId: createTherapistRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - clientId
+              properties:
+                clientId:
+                  type: string
+      responses:
+        "201":
+          description: Request created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        "404":
+          description: Therapist or client not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "409":
+          description: Mapping already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    get:
+      summary: List pending requests for a therapist
+      operationId: listTherapistRequests
+      responses:
+        "200":
+          description: List of mapping requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Mapping'
+        "404":
+          description: Therapist not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /therapists/{therapistId}/requests/{requestId}:
+    parameters:
+      - $ref: '#/components/parameters/therapistId'
+      - $ref: '#/components/parameters/requestId'
+
+    delete:
+      summary: Delete a therapist's mapping request
+      operationId: deleteTherapistRequest
+      responses:
+        "200":
+          description: Deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        "400":
+          description: Invalid request (already a mapping)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "401":
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Therapist or request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # ──────────────────────────────────────────────
+  # THERAPIST MAPPINGS
+  # ──────────────────────────────────────────────
+
+  /therapists/{therapistId}/mappings:
+    parameters:
+      - $ref: '#/components/parameters/therapistId'
+
+    get:
+      summary: List active mappings for a therapist
+      operationId: listTherapistMappings
+      responses:
+        "200":
+          description: List of mappings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Mapping'
+        "404":
+          description: Therapist not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /therapists/{therapistId}/mappings/{mappingId}:
+    parameters:
+      - $ref: '#/components/parameters/therapistId'
+      - $ref: '#/components/parameters/mappingId'
+
+    delete:
+      summary: Delete a therapist mapping
+      operationId: deleteTherapistMapping
+      responses:
+        "200":
+          description: Deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        "401":
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Therapist or mapping not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # ──────────────────────────────────────────────
+  # THERAPIST MAPPING — MESSAGES
+  # ──────────────────────────────────────────────
+
+  /therapists/{therapistId}/mappings/{mappingId}/messages:
+    parameters:
+      - $ref: '#/components/parameters/therapistId'
+      - $ref: '#/components/parameters/mappingId'
+
+    post:
+      summary: Therapist sends a message
+      operationId: createTherapistMessage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageBody'
+      responses:
+        "201":
+          description: Message sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        "401":
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Therapist or mapping not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    get:
+      summary: Therapist retrieves messages for a mapping
+      operationId: listTherapistMessages
+      responses:
+        "200":
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+        "401":
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Therapist or mapping not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # ──────────────────────────────────────────────
+  # THERAPIST SESSIONS
+  # ──────────────────────────────────────────────
+
+  /therapists/{therapistId}/sessions:
+    parameters:
+      - $ref: '#/components/parameters/therapistId'
+
+    get:
+      summary: List confirmed sessions for a therapist
+      operationId: listTherapistSessions
+      responses:
+        "200":
+          description: List of sessions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session'
+        "404":
+          description: Therapist not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # ──────────────────────────────────────────────
+  # THERAPIST SLOTS
+  # ──────────────────────────────────────────────
+
+  /therapists/{therapistId}/slots:
+    parameters:
+      - $ref: '#/components/parameters/therapistId'
+
+    post:
+      summary: Therapist creates an availability slot
+      operationId: createSlot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - datetime
+              properties:
+                datetime:
+                  type: string
+                  format: date-time
+      responses:
+        "201":
+          description: Slot created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        "400":
+          description: Invalid time (in the past)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Therapist not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "409":
+          description: Slot already exists at this datetime
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    get:
+      summary: List all slots for a therapist
+      operationId: listSlots
+      responses:
+        "200":
+          description: List of slots
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Slot'
+        "404":
+          description: Therapist not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /therapists/{therapistId}/slots/{slotId}:
+    parameters:
+      - $ref: '#/components/parameters/therapistId'
+      - $ref: '#/components/parameters/slotId'
+
+    delete:
+      summary: Delete a slot
+      operationId: deleteSlot
+      responses:
+        "200":
+          description: Deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        "401":
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Therapist or slot not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # ──────────────────────────────────────────────
+  # THERAPIST SLOT — SESSION REQUESTS
+  # ──────────────────────────────────────────────
+
+  /therapists/{therapistId}/slots/{slotId}/requests:
+    parameters:
+      - $ref: '#/components/parameters/therapistId'
+      - $ref: '#/components/parameters/slotId'
+
+    get:
+      summary: List session requests for a slot
+      operationId: listSlotRequests
+      responses:
+        "200":
+          description: List of session requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SessionRequestSummary'
+        "401":
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Therapist or slot not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /therapists/{therapistId}/slots/{slotId}/requests/{requestId}:
+    parameters:
+      - $ref: '#/components/parameters/therapistId'
+      - $ref: '#/components/parameters/slotId'
+      - $ref: '#/components/parameters/requestId'
+
+    patch:
+      summary: Therapist approves a session request (converts slot to session)
+      operationId: approveSessionRequest
+      responses:
+        "200":
+          description: Session request approved; slot converted to session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        "401":
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Therapist, slot, or request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+# ──────────────────────────────────────────────
+# COMPONENTS
+# ──────────────────────────────────────────────
+
+components:
+
+  parameters:
+    clientId:
+      name: clientId
+      in: path
+      required: true
+      schema:
+        type: string
+
+    therapistId:
+      name: therapistId
+      in: path
+      required: true
+      schema:
+        type: string
+
+    mappingId:
+      name: mappingId
+      in: path
+      required: true
+      schema:
+        type: string
+
+    requestId:
+      name: requestId
+      in: path
+      required: true
+      schema:
+        type: string
+
+    slotId:
+      name: slotId
+      in: path
+      required: true
+      schema:
+        type: string
+
+  schemas:
+
+    # ── Registration / Update ──
+
+    ClientRegistration:
+      type: object
+      required: [name, email, password]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+
+    ClientUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+
+    TherapistRegistration:
+      type: object
+      required: [name, email, password]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+
+    TherapistUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+
+    # ── Domain Objects ──
+
+    Client:
+      type: object
+      properties:
+        clientId:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+
+    Therapist:
+      type: object
+      properties:
+        therapistId:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+
+    Mapping:
+      type: object
+      properties:
+        mappingId:
+          type: string
+        clientId:
+          type: string
+        therapistId:
+          type: string
+        type:
+          type: string
+          enum: [request, mapping]
+        requestedBy:
+          type: string
+          enum: [client, therapist]
+        journalAccess:
+          type: string
+          enum: [yes, no]
+
+    Message:
+      type: object
+      properties:
+        messageId:
+          type: string
+        mappingId:
+          type: string
+        sender:
+          type: string
+          enum: [client, therapist]
+        body:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+
+    MessageBody:
+      type: object
+      required: [body]
+      properties:
+        body:
+          type: string
+
+    Session:
+      type: object
+      properties:
+        sessionId:
+          type: string
+        datetime:
+          type: string
+          format: date-time
+        therapistId:
+          type: string
+        clientId:
+          type: string
+        mark:
+          type: string
+
+    Slot:
+      type: object
+      properties:
+        slotId:
+          type: string
+        datetime:
+          type: string
+          format: date-time
+        therapistId:
+          type: string
+
+    SessionRequestSummary:
+      type: object
+      properties:
+        requestId:
+          type: string
+        clientId:
+          type: string
+        name:
+          type: string
+
+    # ── Generic Responses ──
+
+    SuccessResponse:
+      type: object
+      properties:
+        message:
+          type: string
+
+    CreatedResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        id:
+          type: string
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
