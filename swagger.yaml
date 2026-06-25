@@ -1,0 +1,25 @@
+openapi: "3.0.1"
+info:
+  title: "Client Service API"
+  version: "1.0.0"
+paths:
+  /clients:
+    post:
+      summary: "Create a new client"
+      operationId: "createClient"
+      responses:
+        "200":
+          description: "Successful response"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  clientId:
+                    type: "string"
+      # This magical extension tells API Gateway to send this request to our Lambda
+      x-amazon-apigateway-integration:
+        uri: "arn:aws:apigateway:${stageVariables.Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${stageVariables.Region}:${stageVariables.Account}:function:${stageVariables.LambdaName}/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
