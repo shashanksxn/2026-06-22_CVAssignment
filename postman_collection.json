@@ -1,0 +1,1123 @@
+{
+  "info": {
+    "_postman_id": "92655b13-cdda-4973-b50c-bce1e14317f2",
+    "name": "Therapy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56105162",
+    "_collection_link": "https://go.postman.co/collection/56105162-92655b13-cdda-4973-b50c-bce1e14317f2?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "/clients",
+      "item": [
+        {
+          "name": "GET /clients",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clients",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /clients",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"\", \"email\": \"\", \"password\": \"\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/clients",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/clients/{clientId}",
+      "item": [
+        {
+          "name": "GET /clients/{clientId}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /clients/{clientId}",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"\", \"email\": \"\", \"password\": \"\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /clients/{clientId}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/clients/{clientId}/requests",
+      "item": [
+        {
+          "name": "GET /clients/{clientId}/requests",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}/requests",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}",
+                "requests"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /clients/{clientId}/requests",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"therapistId\": \"\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}/requests",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}",
+                "requests"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/clients/{clientId}/requests/{requestId}",
+      "item": [
+        {
+          "name": "DELETE /clients/{clientId}/requests/{requestId}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}/requests/{{requestId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}",
+                "requests",
+                "{{requestId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/clients/{clientId}/mappings",
+      "item": [
+        {
+          "name": "GET /clients/{clientId}/mappings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}/mappings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}",
+                "mappings"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/clients/{clientId}/mappings/{mappingId}",
+      "item": [
+        {
+          "name": "DELETE /clients/{clientId}/mappings/{mappingId}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}/mappings/{{mappingId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}",
+                "mappings",
+                "{{mappingId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/clients/{clientId}/mappings/{mappingId}/messages",
+      "item": [
+        {
+          "name": "GET /clients/{clientId}/mappings/{mappingId}/messages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}/mappings/{{mappingId}}/messages",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}",
+                "mappings",
+                "{{mappingId}}",
+                "messages"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /clients/{clientId}/mappings/{mappingId}/messages",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"body\": \"\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}/mappings/{{mappingId}}/messages",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}",
+                "mappings",
+                "{{mappingId}}",
+                "messages"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/clients/{clientId}/mappings/{mappingId}/journal-access",
+      "item": [
+        {
+          "name": "PATCH /clients/{clientId}/mappings/{mappingId}/journal-access",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"journalAccess\": \"\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}/mappings/{{mappingId}}/journal-access",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}",
+                "mappings",
+                "{{mappingId}}",
+                "journal-access"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/clients/{clientId}/mappings/{mappingId}/slots",
+      "item": [
+        {
+          "name": "GET /clients/{clientId}/mappings/{mappingId}/slots",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}/mappings/{{mappingId}}/slots",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}",
+                "mappings",
+                "{{mappingId}}",
+                "slots"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/clients/{clientId}/mappings/{mappingId}/slots/{slotId}",
+      "item": [
+        {
+          "name": "POST /clients/{clientId}/mappings/{mappingId}/slots/{slotId}",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}/mappings/{{mappingId}}/slots/{{slotId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}",
+                "mappings",
+                "{{mappingId}}",
+                "slots",
+                "{{slotId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/clients/{clientId}/sessions",
+      "item": [
+        {
+          "name": "GET /clients/{clientId}/sessions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}/sessions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}",
+                "sessions"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/therapists",
+      "item": [
+        {
+          "name": "GET /therapists",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /therapists",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"\", \"email\": \"\", \"password\": \"\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/therapists",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/therapists/{therapistsId}",
+      "item": [
+        {
+          "name": "GET /therapists/{therapistsId}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /therapists/{therapistsId}",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"\", \"email\": \"\", \"password\": \"\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /therapists/{therapistsId}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/therapists/{therapistsId}/requests",
+      "item": [
+        {
+          "name": "GET /therapists/{therapistsId}/requests",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/requests",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "requests"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /therapists/{therapistsId}/requests",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/requests",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "requests"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/therapists/{therapistsId}/requests/{requestId}",
+      "item": [
+        {
+          "name": "DELETE /therapists/{therapistsId}/requests/{requestId}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/requests/{{requestId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "requests",
+                "{{requestId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/therapists/{therapistsId}/mappings",
+      "item": [
+        {
+          "name": "GET /therapists/{therapistsId}/mappings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/mappings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "mappings"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/therapists/{therapistsId}/mappings/{mappingId}",
+      "item": [
+        {
+          "name": "DELETE /therapists/{therapistsId}/mappings/{mappingId}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/mappings/{{mappingId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "mappings",
+                "{{mappingId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/therapists/{therapistsId}/mappings/{mappingId}/messages",
+      "item": [
+        {
+          "name": "GET /therapists/{therapistsId}/mappings/{mappingId}/messages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/mappings/{{mappingId}}/messages",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "mappings",
+                "{{mappingId}}",
+                "messages"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /therapists/{therapistsId}/mappings/{mappingId}/messages",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"body\": \"\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/mappings/{{mappingId}}/messages",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "mappings",
+                "{{mappingId}}",
+                "messages"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/therapists/{therapistsId}/sessions",
+      "item": [
+        {
+          "name": "GET /therapists/{therapistsId}/sessions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/sessions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "sessions"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/therapists/{therapistsId}/slots",
+      "item": [
+        {
+          "name": "GET /therapists/{therapistsId}/slots",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/slots",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "slots"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /therapists/{therapistsId}/slots",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"datetime\": \"\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/slots",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "slots"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/therapists/{therapistsId}/slots/{slotId}",
+      "item": [
+        {
+          "name": "DELETE /therapists/{therapistsId}/slots/{slotId}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/slots/{{slotId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "slots",
+                "{{slotId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/therapists/{therapistsId}/slots/{slotId}/requests",
+      "item": [
+        {
+          "name": "GET /therapists/{therapistsId}/slots/{slotId}/requests",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/slots/{{slotId}}/requests",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "slots",
+                "{{slotId}}",
+                "requests"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/therapists/{therapistsId}/slots/{slotId}/requests/{requestId}",
+      "item": [
+        {
+          "name": "PATCH /therapists/{therapistsId}/slots/{slotId}/requests/{requestId}",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/slots/{{slotId}}/requests/{{requestId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "slots",
+                "{{slotId}}",
+                "requests",
+                "{{requestId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Future",
+      "item": [
+        {
+          "name": "GET /clients/{clientId}/requests/{requestId}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}/requests/{{requestId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}",
+                "requests",
+                "{{requestId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /clients/{clientId}/mappings/{mappingId}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}/mappings/{{mappingId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}",
+                "mappings",
+                "{{mappingId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /clients/{clientId}/mappings/{mappingId}/journal-access",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}/mappings/{{mappingId}}/journal-access",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}",
+                "mappings",
+                "{{mappingId}}",
+                "journal-access"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /clients/{clientId}/sessions",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId}}/sessions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId}}",
+                "sessions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /therapists/{therapistsId}/requests/{requestId}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/requests/{{requestId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "requests",
+                "{{requestId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /therapists/{therapistsId}/mappings/{mappingId}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/mappings/{{mappingId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "mappings",
+                "{{mappingId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /therapists/{therapistsId}/slots/{slotId}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/slots/{{slotId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "slots",
+                "{{slotId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /therapists/{therapistsId}/slots/{slotId}/requests/{requestId}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/slots/{{slotId}}/requests/{{requestId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "slots",
+                "{{slotId}}",
+                "requests",
+                "{{requestId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /therapists/{therapistsId}/slots/{slotId}/requests/{requestId}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/slots/{{slotId}}/requests/{{requestId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "slots",
+                "{{slotId}}",
+                "requests",
+                "{{requestId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /therapists/{therapistsId}/slots/{slotId}",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/therapists/{{therapistsId}}/slots/{{slotId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "therapists",
+                "{{therapistsId}}",
+                "slots",
+                "{{slotId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://w62jiaqpf2.execute-api.ap-south-1.amazonaws.com/prod"
+    },
+    {
+      "key": "clientId",
+      "value": ""
+    },
+    {
+      "key": "mappingId",
+      "value": ""
+    },
+    {
+      "key": "requestId",
+      "value": ""
+    },
+    {
+      "key": "slotId",
+      "value": ""
+    },
+    {
+      "key": "therapistsId",
+      "value": ""
+    }
+  ]
+}
